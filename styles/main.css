@@ -157,6 +157,11 @@ footer aside {
     padding: 0 40px 40px;
     text-align: right;
 }
+.gash path {
+    fill: #fff !important;
+    stroke: #fff;
+    stroke-width: 0.4px;
+}
 .s a {
     cursor: pointer;
 }
