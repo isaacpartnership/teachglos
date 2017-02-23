@@ -1,6 +1,6 @@
 (function(){
     var countdown = document.querySelector('.c');
-    var DATETIME = new Date(countdown.getAttribute("datetime"));
+    var DATETIME = new Date(countdown.getAttribute('datetime'));
     var intervalBound = false;
     var el = {
         weeks: document.querySelector('.d-w'),
