@@ -29,9 +29,9 @@ gulp.task('scripts', () => {
         .pipe(gulp.dest(`${outputDir}/scripts/`));
 });
 
-// interpolate and copy static files to the output directory
+// copy static files to the output directory
 gulp.task('static', () => {
-    return gulp.src('index.html')
+    return gulp.src(['robots.txt', 'robots-deny.txt', '.htaccess'])
         .pipe(fileinclude({
             prefix: '@@',
             basepath: '@file',
@@ -39,10 +39,22 @@ gulp.task('static', () => {
         .pipe(gulp.dest(`${outputDir}/`));
 });
 
+// interpolate, minify, and copy static files to the output directory
+gulp.task('markup', () => {
+    return gulp.src(['index.html'])
+        .pipe(fileinclude({
+            prefix: '@@',
+            basepath: '@file',
+        }))
+        .pipe(htmlmin())
+        .pipe(gulp.dest(`${outputDir}/`));
+});
+
 gulp.task('watch', () => {
     gulp.watch(['styles/*.css'], ['build']);
     gulp.watch(['scripts/*.js'], ['build']);
-    gulp.watch(['index.html'], ['static']);
+    gulp.watch(['robots.txt', 'robots-deny.txt', '.htaccess'], ['static']);
+    gulp.watch(['index.html'], ['markup']);
 });
 
 // clean output directory
@@ -52,7 +64,7 @@ gulp.task('clean', () => {
 })
 
 gulp.task('build', () => {
-    runSequence(['styles', 'scripts'], 'static');
+    runSequence(['styles', 'scripts', 'static'], 'markup');
 });
 gulp.task('default', () => {
     runSequence('clean', ['build', 'watch']);

@@ -1,8 +1,21 @@
+*,
+::after,
+::before {
+    position: relative;
+    box-sizing: border-box;
+}
+
 html {
-    line-height: 1.15;
+    height: 100%;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
+}
+body {
+    margin: 0;
+    min-height: 100%;
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.2;
 }
 article,
 aside,
@@ -13,30 +26,16 @@ section,
 main {
     display: block;
 }
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 16px;
-    line-height: 22px;
-    overflow-y: scroll;
+main {
+    padding: 30px 240px 30px 60px;
 }
 main,
-p,
-li,
-a {
-    font-family: 'Open Sans',sans-serif;
+aside {
+    animation: fadein 0.4s;
 }
-*,
-::after,
-::before {
-    box-sizing: border-box;
-}
+
 .b-p {
     background-color: #84378c;
-    color: #fff;
-}
-.b-r {
-    background-color: #b61f4f;
     color: #fff;
 }
 a {
@@ -81,9 +80,6 @@ li {
 small {
     font-size: 14px;
 }
-.logo svg {
-    height: 140px;
-}
 .b {
     fill: #b61f4f;
 }
@@ -108,6 +104,7 @@ small {
     border: solid 2px #fff;
     line-height: 40px;
     text-decoration: none;
+    text-transform: uppercase;
     transition: all .2s;
 }
 .btn:hover {
@@ -125,6 +122,7 @@ small {
 .c {
     display: block;
     width: 18em;
+    max-width: 100%;
     margin: 30px 0;
 }
 .c::after {
@@ -133,7 +131,7 @@ small {
     clear: both;
 }
 .c-d {
-    padding: 0.2em 0 0.8em;
+    padding: 0.5em 0 1em;
     width: calc(25% - 0.75em);
     float: left;
     color: #84378c;
@@ -156,21 +154,11 @@ small {
     line-height: 0.7;
 }
 footer aside {
-    padding: 40px;
-}
-.s {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    max-width: 400px;
-    text-align: justify;
+    padding: 0 40px 40px;
+    text-align: right;
 }
 .s a {
     cursor: pointer;
-}
-footer a:hover {
-    opacity: 0.7;
-    transition: all .2s;
 }
 .s a:not(:first-child) {
     margin-left: 20px;
@@ -181,50 +169,39 @@ footer a:hover {
     fill: #fff;
     opacity: 1;
 }
-main {
-    padding: 20px 15px;
-    clear: both;
+footer::before {
+    content: '';
+    display: block;
+    position: fixed;
+    left: 960px;
+    width: 200vw;
+    height: 100%;
+    transform: skew(-30deg);
+    background: #b61f4f;
 }
-footer {
-    text-align: center;
+footer a:hover {
+    opacity: 0.7;
+    transition: all .2s;
 }
 header {
     margin-bottom: 30px;
 }
-@media (min-width: 992px) {
-    body,
-    footer {
-        min-height: 895px;
-    }
+
+@media (min-width: 800px) {
     h1 {
-        font-size: 52px;
-        line-height: 58px;
-        margin-right: 180px;
-    }
-    main {
-        padding: 60px 290px 20px 60px;
+        font-size: 2.4rem;
+        line-height: 1.2;
     }
     footer {
         height: 100%;
-        width: 230px;
-        position: absolute;
+        width: 300px;
+        position: fixed;
         right: 0;
         top: 0;
         z-index: 2;
     }
-    footer::before {
-        content: "";
-        display: block;
-        height: 100%;
-        min-width: 470px;
-        width: 55vh;
-        right: 230px;
-        top: 0;
-        position: absolute;
-        background: linear-gradient(to bottom right, transparent 50%, #b61f4f 50%);
-    }
     footer aside {
-        position: fixed;
+        position: absolute;
         right: 0;
     }
     .gash {
@@ -236,35 +213,67 @@ header {
         text-align: right;
     }
 }
-@media (min-width: 992px) and (max-width: 1250px) {
-    .u span {
-        display: block;
+@media (max-width: 799px) {
+    body {
+        display: flex;
+        flex-direction: column;
     }
-    ul {
-        margin-right: 270px;
+    main {
+        padding: 30px 40px;
     }
-}
-@media (min-width: 1200px) {
-    .l span {
-        display: block;
+    footer {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        margin-top: -60px;
+        min-height: 250px;
+        overflow: hidden;
     }
-}
-@media (max-width: 1199px) {
-    .l {
-        max-width: 370px;
-    }
-}
-@media (min-width: 992px) and (max-width: 1190px) {
-    .r span {
-        display: block;
+    footer::before {
+        position: absolute;
+        top: 0;
+        left: 0 !important;
+        height: 100em;
+        transform: skewY(-15deg);
     }
 }
 
-main {
-    -webkit-animation: fadein 0.4s; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadein 0.4s; /* Firefox < 16 */
-    -o-animation: fadein 0.4s; /* Opera < 12.1 */
-    animation: fadein 0.4s;
+/* WRAPPING */
+
+.l span {
+    display: block;
+}
+
+/* always vertically centred left content */
+@media (min-height: 721px) and (min-width: 1025px) {
+    main {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+@media (max-width: 1200px) {
+    footer::before {
+        left: calc(100vw - 240px);
+    }
+}
+@media (max-height: 768px) {
+    :root {
+        font-size: 85%;
+    }
+}
+
+@media (min-width: 800px) and (max-width: 1024px) {
+    .u span,
+    .r span {
+        display: block;
+    }
+    .l {
+        max-width: 370px;
+    }
 }
 
 @keyframes fadein {
